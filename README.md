@@ -91,14 +91,13 @@ Rules5=cSplit(Rules4, "LHS",",")
 Rules6=subset(Rules5, select= -c(rules_2))
 names(Rules6)[names(Rules6) == 'rules_3'] <- 'RHS'
 
-# What are customers likely to buy before they purchase "Product A"
 rules<-apriori(data=dt, parameter=list(supp=0.001,conf = 0.8), 
                appearance = list(default="lhs",rhs="0"),
                control = list(verbose=F))
 rules<-sort(rules, decreasing=TRUE,by="confidence")
 inspect(rules[1:5])
 
-# What are customers likely to buy if they purchased "Product A"
+
 rules<-apriori(data=dt, parameter=list(supp=0.001,conf = 0.8),appearance = list(default="rhs",lhs="0"),control = list(verbose=F))
 rules<-sort(rules, decreasing=TRUE,by="confidence")
 inspect(rules[1:5])
